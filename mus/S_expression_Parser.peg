@@ -1,0 +1,20 @@
+start = valid
+
+valid = atom / expression
+
+expression = 	"(" 
+				second:atom 
+                third:(spaced_atom / spaced_expression)*
+                ")"
+                {return [second].concat(third)}
+       
+spaced_atom = first:" " second: atom+ {return second.join("")}
+
+spaced_expression = " " second: expression {return second}
+ 
+validchar
+    = [0-9a-zA-Z_?!+\-=@#$%^&*/.]
+
+atom =
+    chars:validchar+
+        { return chars.join(""); }  
