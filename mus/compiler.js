@@ -5,8 +5,8 @@ var compile=function (MUS) {
     var letterPitch={c: 0, d: 2, e: 4, f: 5, g: 7, a: 9, b: 11};
 
     var convertPitch = function (pitch) {
-        return 12 + 12 * parseInt(pitch.substr(1,1)) + letterPitch[pitch.substr(0,1)];
-    }
+        return 12 + 12 * parseInt(pitch.substr(1,1),10) + letterPitch[pitch.substr(0,1)];
+    };
     
     var recurse=function (MUS,parentSeqOrPar) {
         if (MUS.tag === 'note') {
