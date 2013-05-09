@@ -72,7 +72,5 @@ var evalScheem = function (expr, env) {
          return 0;
     }
 };
+if (typeof window === 'undefined') {module.exports = evalScheem;}
 
-var evalScheemString = function(expr, env) {
-   return evalScheem(SCHEEM.parse(expr), env);
-}

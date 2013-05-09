@@ -1,3 +1,18 @@
+if (typeof window === 'undefined') {
+   //nodejs - load modules
+   var assert = require('chai').assert;
+   var evalScheem = require('./evalScheem.js');
+   var parse = require('./parser.js').parse;
+} else {
+   //in browser
+   var parse = SCHEEM.parse;
+   var assert = chai.assert;
+}
+
+var evalScheemString = function(expr, env) {
+   return evalScheem(parse(expr), env);
+};
+
 suite('quote', function() {
     test('a number', function() {
         assert.deepEqual(
@@ -136,13 +151,13 @@ suite('cons, car, cdr', function() {
 suite('parse', function() {
    test('a number', function() {
       assert.deepEqual(
-         SCHEEM.parse('42'),
+         parse('42'),
          42
       );
    });
    test('a variable', function() {
       assert.deepEqual(
-         SCHEEM.parse('x'),
+         parse('x'),
          'x'
       );
    });
@@ -160,7 +175,7 @@ suite('parse and eval', function() {
          8
       );
    });
-   test('an sub-expression', function() {
+   test('a sub-expression', function() {
       assert.deepEqual(
          evalScheemString('(+ 5 (* 2 3))'),
          11

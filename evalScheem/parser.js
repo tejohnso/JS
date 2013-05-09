@@ -431,3 +431,5 @@ var SCHEEM = (function(){
   
   return result;
 })();
+
+if (typeof window === 'undefined') {module.exports = SCHEEM;}
